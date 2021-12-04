@@ -3,6 +3,7 @@ const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
 const routes = require("./routes/routes");
+const formData = require("./controller/controller");
 require("dotenv").config();
 
 app.set("view engine", "ejs");
@@ -23,6 +24,7 @@ mongoose
 	});
 
 app.use("/routes", routes);
+app.use("/controller", formData);
 
 app.get("/", (req, res) => {
 	res.render("index");

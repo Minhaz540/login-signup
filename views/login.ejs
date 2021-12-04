@@ -32,16 +32,16 @@
 </head>
 <body class="text-center">
     <main class="form-signin">
-        <form action="/routes/profile" enctype="multipart/form-data">
-            <a href="http://localhost:8080/"><img class="mb-4 rounded" src="../image/logo.jpg" alt="logo" width="72"></a>
+        <form action="/controller/loginData" enctype="multipart/form-data" method="post">
+            <a href="/"><img class="mb-4 rounded" src="../image/logo.jpg" alt="logo" width="72"></a>
             <h1 class="h3 mb-3 fw-normal">Please Log in</h1>
 
             <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInput" required placeholder="name@example.com">
+                <input name="email" type="email" class="form-control" id="floatingInput" required placeholder="name@example.com">
                 <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" required placeholder="Password">
+                <input name="password" type="password" class="form-control" id="floatingPassword" required placeholder="Password">
                 <label for="floatingPassword">Password</label>
             </div>
 
@@ -51,6 +51,7 @@
                 </label>
             </div>
             <button class="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
+            <p class="mt-2">Don't have an account? <a href="/routes/signup">Signup</a></p>
             <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
         </form>
     </main>

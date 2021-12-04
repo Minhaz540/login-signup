@@ -32,30 +32,30 @@
 </head>
 <body class="text-center">
     <main class="form-signin">
-        <form action="" enctype="multipart/form-data">
+        <form action="/controller/signupData" enctype="multipart/form-data" method="post">
             <a href="http://localhost:8080/"><img class="mb-4 rounded" src="../image/logo.jpg" alt="logo" width="72"></a>
             <h1 class="h3 mb-3 fw-normal">Please Sign up</h1>
 
             <div class="form-floating">
-                <input type="text" class="form-control" id="floatingInput" required placeholder="name">
+                <input type="text" name="username" class="form-control" id="floatingInput" required placeholder="name">
                 <label for="floatingInput">Username</label>
             </div>
             <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInput" required placeholder="name@example.com">
+                <input type="email" name="email" class="form-control" id="floatingInput" required placeholder="name@example.com">
                 <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" required placeholder="Password">
+                <input type="password" name="password" class="form-control" id="floatingPassword" required placeholder="Password">
                 <label for="floatingPassword">Password</label>
             </div>
             <div class="mb-3">
                 <label for="formFile" class="form-label">Choose profile picture</label>
-                <input class="form-control" type="file" id="formFile" required>
+                <input name="profile" class="form-control" type="file" id="formFile" required>
             </div>
 
             <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
-            <p class="mt-2">Already have a account? <a href="#">Login</a></p>
-            <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+            <p class="mt-2">Already have an account? <a href="/routes/login">Login</a></p>
+            <p class="mt-4 mb-3 text-muted">&copy; 2017–2021</p>
         </form>
     </main>
 

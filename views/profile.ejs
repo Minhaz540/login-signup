@@ -21,20 +21,26 @@
             <span>Guest</span>
             <div class="dropdown">
                 <button class="btn btn-info dropdown-toggle" data-placement="left" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="../image/empty-profile.png" height="40px" width="40px" class="rounded-circle">
+                    <% try { %> 
+                    <img src="../upload/<%= imageName %>" height="40px" width="40px" class="rounded-circle">
+                    <% } catch(e) { %> 
+                    <p>Profile picture not found: <%= e %></p>
+                    <% } %>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item" href="/routes/signup">Sign Up</a></li>
                     <li><a class="dropdown-item" href="/routes/login">Log In</a></li>
-                    <!-- <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li> -->
                 </ul>
             </div>
         </div>
     </nav>
     <main class="container mt-5 d-flex justify-content-center">
         <div class="card" style="width: 18rem;">
-            <img src="" class="card-img-top rounded-circle" alt="profile-image">
+            <% try { %> 
+            <img src="../upload/<%= imageName %>" height="70px" width="70px" class="card-img-top rounded-circle" alt="profile-image">
+            <% } catch(e) { %> 
+            <p>Profile picture not found: <%= e %> </p>
+            <% } %> 
             <div class="card-body">
                 <h5 class="card-title">Profile Information</h5>
                 <p class="card-text">Username: </p>
