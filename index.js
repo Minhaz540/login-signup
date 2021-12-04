@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
+const routes = require("./routes/routes");
 require("dotenv").config();
 
 app.set("view engine", "ejs");
@@ -20,6 +21,8 @@ mongoose
 	.catch((err) => {
 		console.error("Error: " + err);
 	});
+
+app.use("/routes", routes);
 
 app.get("/", (req, res) => {
 	res.render("index");
