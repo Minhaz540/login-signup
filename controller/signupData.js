@@ -55,12 +55,14 @@ const upload = multer({
 });
 
 signupData.post("/", upload.single("profile"), (req, res) => {
+	const role = "User";
 	const { username, email, password } = req.body;
 	const formSaveData = new userModel({
 		username,
 		email,
 		password,
 		imageName,
+		role
 	});
 	formSaveData.save((err) => {
 		if (err) {
@@ -74,7 +76,7 @@ signupData.post("/", upload.single("profile"), (req, res) => {
 			);
 			// redirected to the show profile page
 		} else {
-			res.render("profile", { imageName });
+			res.render("profile", { username, email, imageName, role });
 		}
 	});
 });

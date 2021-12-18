@@ -24,3 +24,26 @@ nav {
     flex-direction: row;
     gap: 10px;
 }
+.profile-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 10px;
+    padding-bottom: 10px;
+}
+.profile-img {
+    width: 200px;
+    height: 200px;
+}
+.err-floating {
+    position: absolute;
+    left: 50%;
+    background-color: #DC3545;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+}
