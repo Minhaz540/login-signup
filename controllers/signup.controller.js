@@ -1,15 +1,17 @@
 const express = require("express");
-const signupData = express();
 require("dotenv").config();
 const bcrypt = require("bcrypt");
 const multer = require("multer");
 const path = require("path");
 const { unlink } = require("fs");
-const userModel = require("../models/userSchema");
+const userModel = require("../models/user.model");
 
-signupData.use(express.urlencoded({ extended: false }));
 const { UPLOAD_FOLDER } = process.env;
 let imageName;
+
+exports.signup = (req, res) => {
+	res.render("signup", { title: "Signup" });
+};
 
 const storage = multer.diskStorage({
 	destination: (req, file, callback) => {
@@ -30,7 +32,7 @@ const storage = multer.diskStorage({
 	},
 });
 
-const upload = multer({
+exports.upload = multer({
 	storage: storage,
 	limits: {
 		fileSize: 10000000,
@@ -54,7 +56,7 @@ const upload = multer({
 	},
 });
 
-signupData.post("/", upload.single("profile"), (req, res) => {
+exports.signupData =  (req, res) => {
 	const role = "User";
 	const { username, email, password } = req.body;
 	const formSaveData = new userModel({
@@ -74,11 +76,8 @@ signupData.post("/", upload.single("profile"), (req, res) => {
 					if (err) console.error(err);
 				}
 			);
-			// redirected to the show profile page
 		} else {
-			res.render("profile", { username, email, imageName, role });
+			res.render("profile", { title: "Profile", username, email, imageName, role });
 		}
 	});
-});
-
-module.exports = signupData;
+};

@@ -2,13 +2,15 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
-const routes = require("./routes/routes");
-const formData = require("./controller/controller");
+const homeRoute = require("./routes/home.route")
+const profileRoute = require("./routes/profile.route");
+const signupRoute = require("./routes/signup.route");
+const loginRoute = require("./routes/login.route");
 require("dotenv").config();
 
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 const { PORT, HOSTNAME, DB_CONNECTION_STRING } = process.env;
 
 mongoose
@@ -23,12 +25,11 @@ mongoose
 		console.error("Error: " + err);
 	});
 
-app.use("/routes", routes);
-app.use("/controller", formData);
+app.use(homeRoute);
+app.use(signupRoute);
+app.use(loginRoute);
+app.use(profileRoute);
 
-app.get("/", (req, res) => {
-	res.render("index");
-});
 
 mongoose.connection.on("open", () => {
 	app.listen(PORT, () => {

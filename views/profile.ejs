@@ -1,4 +1,4 @@
-<%- include("./template/header.ejs") %> 
+<%- include("./template/indexHeader.ejs") %> 
 <body>
     <nav class="bg-info">
         <a href="/">
@@ -9,7 +9,7 @@
         </a>
         <div class="auth-section">
             <% try { %> 
-            <% if (role.length == 0) { %> 
+            <% if (!role.length) { %> 
                 <span>Guest</span>
             <% } else { %>
                 <span><%= role %></span>
@@ -22,8 +22,8 @@
                     <% } %>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="/routes/signup">Sign Up</a></li>
-                    <li><a class="dropdown-item" href="/routes/login">Log In</a></li>
+                    <li><a class="dropdown-item" href="/signup">Sign Up</a></li>
+                    <li><a class="dropdown-item" href="/login">Log In</a></li>
                 </ul>
             </div>
         </div>
