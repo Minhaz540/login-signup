@@ -9,7 +9,7 @@
         </a>
         <div class="auth-section">
             <% try { %> 
-            <% if (!role.length) { %> 
+            <% if (!role) { %> 
                 <span>Guest</span>
             <% } else { %>
                 <span><%= role %></span>
