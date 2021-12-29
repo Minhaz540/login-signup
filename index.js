@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
-const homeRoute = require("./routes/home.route")
+const homeRoute = require("./routes/home.route");
 const profileRoute = require("./routes/profile.route");
 const signupRoute = require("./routes/signup.route");
 const loginRoute = require("./routes/login.route");
@@ -31,6 +31,10 @@ app.use(signupRoute);
 app.use(loginRoute);
 app.use(profileRoute);
 
+app.use((req, res, next) => {
+	res.render("404_page", { title: "404 not found" });
+	next();
+});
 
 mongoose.connection.on("open", () => {
 	app.listen(PORT, () => {

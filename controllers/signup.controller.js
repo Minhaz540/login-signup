@@ -56,28 +56,49 @@ exports.upload = multer({
 	},
 });
 
-exports.signupData =  (req, res) => {
+exports.signupData = async (req, res) => {
 	const role = "User";
-	const { username, email, password } = req.body;
-	const formSaveData = new userModel({
-		username,
-		email,
-		password,
-		imageName,
-		role
+	const saltRounds = 5;
+	let hashedPassword;
+	const { username, email, password, confirmPassword } = req.body;
+	hashedPassword = await bcrypt.hash(password, saltRounds);
+	const checkData = await userModel.find({
+		username: username,
+		email: email,
 	});
-	formSaveData.save((err) => {
-		if (err) {
-			res.status(500).send("Internal server error: " + err);
-			// deleting unused file
-			unlink(
-				path.join(__dirname, `../public/upload/${imageName}`),
-				(err) => {
-					if (err) console.error(err);
-				}
-			);
-		} else {
-			res.render("profile", { title: "Profile", username, email, imageName, role });
-		}
-	});
+	if (password === confirmPassword && !checkData[0]) {
+		const formSaveData = new userModel({
+			username,
+			email,
+			password: hashedPassword,
+			imageName,
+			role,
+		});
+		formSaveData.save((err) => {
+			if (err) {
+				res.status(500).send("Internal server error: " + err);
+				// deleting unused file
+				unlink(
+					path.join(__dirname, `../public/upload/${imageName}`),
+					(err) => {
+						if (err) console.error(err);
+					}
+				);
+			} else {
+				res.render("profile", {
+					title: "Profile",
+					username,
+					email,
+					imageName,
+					role,
+				});
+			}
+		});
+	} else {
+		res.send("User already available or same password does not matched");
+		// deleting unused file
+		unlink(path.join(__dirname, `../public/upload/${imageName}`), (err) => {
+			if (err) console.error(err);
+		});
+	}
 };
