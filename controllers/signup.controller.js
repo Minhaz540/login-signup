@@ -1,4 +1,5 @@
 const express = require("express");
+const { check } = require("express-validator");
 require("dotenv").config();
 const bcrypt = require("bcrypt");
 const multer = require("multer");
@@ -61,6 +62,10 @@ exports.signupData = async (req, res) => {
 	const saltRounds = 5;
 	let hashedPassword;
 	const { username, email, password, confirmPassword } = req.body;
+	check(username)
+		.isAlpha("en-US", { ignore: " -" })
+		.withMessage("Name must not contain anything than characters")
+		.trim();
 	hashedPassword = await bcrypt.hash(password, saltRounds);
 	const checkData = await userModel.find({
 		username: username,

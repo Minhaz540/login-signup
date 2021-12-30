@@ -6,19 +6,20 @@
             <h1 class="h3 mb-3 fw-normal">Please Sign up</h1>
 
             <div class="form-floating">
-                <input type="text" name="username" class="form-control" id="floatingInput" required placeholder="name">
+                <input type="text" name="username" class="form-control" id="floatingInput" required placeholder="name" pattern="[A-Za-z0-9]{4,}" title="Username must not contain special characters or less than 4 characters">
                 <label for="floatingInput">Username</label>
             </div>
             <div class="form-floating">
                 <input type="email" name="email" class="form-control" id="floatingInput" required placeholder="name@example.com">
                 <label for="floatingInput">Email address</label>
             </div>
-            <div class="form-floating">
-                <input type="password" name="password" class="form-control mb-0" id="floatingPassword" required placeholder="Password">
-                <label id="checkPassword" for="floatingPassword">Password</label>
+            <div class="form-floating containing-eye">
+                <input type="password" oninput="enableCheckPasswordAndEyeBtn();" name="password" class="form-control opPassword mb-0" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="floatingPassword" required placeholder="Password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+                <label id="password" for="floatingPassword">Password</label>
+                <i class="bi bi-eye-slash" id="togglePassword"></i>
             </div>
             <div class="form-floating">
-                <input type="password" name="confirmPassword" class="form-control" id="floatingPassword" required placeholder="Confirm Password">
+                <input type="password" name="confirmPassword" class="form-control checkPassword" id="floatingPassword" required disabled placeholder="Confirm Password">
                 <label id="checkPassword" for="floatingPassword">Confirm Password</label>
             </div>
             <div class="mb-3">

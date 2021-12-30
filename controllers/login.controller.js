@@ -9,8 +9,17 @@ exports.login = (req, res) => {
 };
 
 exports.loginData = async (req, res) => {
-	const {email, password} = req.body;
-	const data = await userModel.find({ email: email });
+	const { usernameOrEmail, password } = req.body;
+	let email, username, data;
+	// return true or false for the find result
+	const identify = /@/.test(usernameOrEmail);
+	if (identify) {
+		email =  usernameOrEmail;
+		data = await userModel.find({ email: email});
+	} else {
+		username =  usernameOrEmail;
+		data = await userModel.find({ username: username });
+	}
 	if (data[0]) {
 		const match = await bcrypt.compare(password, data[0].password);
 		if (!match) {
@@ -24,7 +33,6 @@ exports.loginData = async (req, res) => {
 				role: data[0].role,
 			});
 		}
-		
 	} else {
 		res.send(`Login failed! Invalid password or email.`);
 	}

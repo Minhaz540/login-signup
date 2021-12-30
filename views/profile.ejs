@@ -1,4 +1,4 @@
-<%- include("./template/indexHeader.ejs") %> 
+<%- include("./template/profileHeader.ejs") %> 
 <body>
     <nav class="bg-info">
         <a href="/">
@@ -9,7 +9,7 @@
         </a>
         <div class="auth-section">
             <% try { %> 
-            <% if (!role) { %> 
+            <% if (role.length == undefined) { %> 
                 <span>Guest</span>
             <% } else { %>
                 <span><%= role %></span>
@@ -22,8 +22,12 @@
                     <% } %>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="/signup">Sign Up</a></li>
-                    <li><a class="dropdown-item" href="/login">Log In</a></li>
+                    <% if(role.length < 0) { %> 
+                        <li><a class="dropdown-item" href="/signup"><i class="fas fa-user-plus"></i> Sign Up</a></li>
+                        <li><a class="dropdown-item" href="/login"><i class="fas fa-sign-in-alt"></i> Log In</a></li>
+                    <% } else { %> 
+                        <li><a class="dropdown-item" href="/"><i class="fas fa-sign-out-alt"></i> Sign Out</a></li>
+                    <% } %> 
                 </ul>
             </div>
         </div>
