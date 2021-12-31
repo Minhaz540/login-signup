@@ -10,7 +10,18 @@ body {
 	padding-bottom: 40px;
 	background-color: #f5f5f5;
 }
-containing-eye {
+
+.form-error-msg {
+	background-color: rgba(255, 0, 0, 0.068);
+	border: 1px solid red;
+}
+
+.form-error-msg span {
+	color: red;
+	font-size: 13px;
+}
+
+.containing-eye {
 	position: relative;
 }
 
