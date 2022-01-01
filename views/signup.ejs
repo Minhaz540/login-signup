@@ -1,7 +1,7 @@
 <%- include("./template/header.ejs") %> 
 <body class="text-center">
     <main class="form-signin">
-        <form action="/signup" enctype="multipart/form-data" method="post">
+        <form onsubmit="return isValidateForm();" action="/signup" enctype="multipart/form-data" method="post">
             <a href="http://localhost:8080/"><img class="mb-4 rounded" src="../image/logo.jpg" alt="logo" width="72"></a>
             <h1 class="h3 mb-3 fw-normal">Please Sign up</h1>
 
@@ -10,24 +10,25 @@
                 <label for="floatingInput">Username</label>
             </div>
             <div class="form-floating">
-                <input type="email" name="email" class="form-control" id="floatingInput" required placeholder="name@example.com">
+                <input type="email" name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" id="floatingInput" required placeholder="name@example.com" title="Email must be must be in the following order: characters@characters.domain">
                 <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating containing-eye">
-                <input type="password" oninput="enableCheckPasswordAndEyeBtn();" name="password" class="form-control opPassword mb-0" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="floatingPassword" required placeholder="Password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+                <input type="password" oninput="enableCheckPasswordAndEyeBtn();" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="password" class="form-control opPassword mb-0" id="floatingPassword" required placeholder="Password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
                 <label id="password" for="floatingPassword">Password</label>
                 <i class="bi bi-eye-slash" id="togglePassword"></i>
             </div>
-            <div class="form-floating">
-                <input type="password" name="confirmPassword" class="form-control checkPassword" id="floatingPassword" required disabled placeholder="Confirm Password">
+            <div class="form-floating confirm-password">
+                <input type="password" name="confirmPassword" class="form-control checkPassword" id="floatingPassword" required disabled placeholder="Confirm Password" title="Must be matched with the original password">
                 <label id="checkPassword" for="floatingPassword">Confirm Password</label>
             </div>
+            <span class="text-danger error-password-matched">Password does not matched!</span>
             <div class="mb-3">
                 <label for="formFile" class="form-label">Choose profile picture</label>
-                <input name="profile" class="form-control" type="file" id="formFile" required>
+                <input name="profile" accept="image/png, image/jpg, image/jpeg" class="form-control" type="file" id="formFile" required>
             </div>
 
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+            <button onclick="validateForm();" class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
             <p class="mt-2">Already have an account? <a href="/login">Login</a></p>
             <p class="mt-4 mb-3 text-muted">&copy; 2017–2021</p>
         </form>

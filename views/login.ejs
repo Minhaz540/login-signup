@@ -5,9 +5,11 @@
             <a href="/"><img class="mb-4 rounded" src="../image/logo.jpg" alt="logo" width="72"></a>
             <h1 class="h3 mb-3 fw-normal">Please Log in</h1>
 
-            <div class="form-control form-error-msg">
-                <span>Invalid username or password</span>
-            </div>
+            <% if(typeof msg != "undefined") { %> 
+                <div class="form-control form-error-msg">
+                    <span><%= msg %> </span>
+                </div>
+            <% } %> 
             <div class="form-floating">
                 <input name="usernameOrEmail" type="text" class="form-control" id="floatingInput" required placeholder="Email or Username">
                 <label for="floatingInput">Email or Username</label>
@@ -20,10 +22,10 @@
 
             <div class="checkbox mb-3">
                 <label>
-                    <input type="checkbox" value="remember-me"> Remember me
+                    <input type="checkbox" id="rememberMe" value="lsRememberMe"> Remember me
                 </label>
             </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
+            <button onclick="lsRememberMe();" class="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
             <p class="mt-2">Don't have an account? <a href="/signup">Signup</a></p>
             <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
         </form>

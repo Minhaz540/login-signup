@@ -27,10 +27,10 @@ body {
 
 #togglePassword {
 	position: absolute;
-    right: 16px;
-    font-size: 19px;
-    top: 10px;
-    cursor: pointer;
+	right: 12px;
+	font-size: 19px;
+	top: 11px;
+	cursor: pointer;
 	display: none;
 }
 
@@ -71,6 +71,14 @@ body {
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	user-select: none;
+}
+
+.error-password-matched {
+	float: left;
+	padding: 0px 10px 10px 10px;
+	margin-top: -9px;
+	font-size: 15px;
+	display: none;
 }
 
 @media (min-width: 768px) {

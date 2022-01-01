@@ -23,7 +23,7 @@ exports.loginData = async (req, res) => {
 	if (data[0]) {
 		const match = await bcrypt.compare(password, data[0].password);
 		if (!match) {
-			res.send("Login failed! Invalid password or email.");
+			res.render("login",{ title: "Log in", msg: "Invalid password or Username" });
 		} else {
 			res.render("Profile", {
 				title: "Profile",
