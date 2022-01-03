@@ -1,4 +1,5 @@
 <%- include("./template/header.ejs") %> 
+</head>
 <body class="text-center">
     <main class="form-signin">
         <form onsubmit="return isValidateForm();" action="/signup" enctype="multipart/form-data" method="post">
@@ -19,12 +20,16 @@
                 <i class="bi bi-eye-slash" id="togglePassword"></i>
             </div>
             <div class="form-floating confirm-password">
-                <input type="password" name="confirmPassword" class="form-control checkPassword" id="floatingPassword" required disabled placeholder="Confirm Password" title="Must be matched with the original password">
+                <input type="password" name="confirmPassword" class="form-control checkPassword mb-0" id="floatingPassword" required disabled placeholder="Confirm Password" title="Must be matched with the original password">
                 <label id="checkPassword" for="floatingPassword">Confirm Password</label>
             </div>
             <span class="text-danger error-password-matched">Password does not matched!</span>
+            <div class="form-floating">
+            <textarea name="bio" class="form-control mb-3" placeholder="Bio" id="floatingTextarea2" style="height: 100px"></textarea>
+                <label for="floatingTextarea2">About yourself</label>
+            </div>
             <div class="mb-3">
-                <label for="formFile" class="form-label">Choose profile picture</label>
+                <label for="formFile" class="form-label">Upload profile picture</label>
                 <input name="profile" accept="image/png, image/jpg, image/jpeg" class="form-control" type="file" id="formFile" required>
             </div>
 
@@ -33,4 +38,4 @@
             <p class="mt-4 mb-3 text-muted">&copy; 2017–2021</p>
         </form>
     </main>
-<%- include("./template/footer.ejs")  %> 
+<%- include("./template/footer.ejs") %> 

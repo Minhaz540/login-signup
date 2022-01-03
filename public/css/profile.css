@@ -1,0 +1,67 @@
+.profile-div {
+    position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    padding: 20px;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover; 
+    height: 280px;
+    width: 100%;
+    margin-bottom: 50px;
+}
+.profile-img {
+    position: absolute;
+    bottom: -50px;
+    border: 6px solid #0059ff;
+	width: 200px;
+	height: 200px;
+}
+.cng-image {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #ece0e0;
+	border: 3px solid rgb(99, 97, 97);
+	height: 38px;
+	width: 38px;
+	border-radius: 50%;
+	cursor: pointer;
+	color: black;
+}
+.cng-profile-image {
+    top: 265px;
+	left: 52%;
+	margin-left: 38px;
+}
+.cng-cover-image {
+    top: 13px;
+	right: 13px;
+}
+/* about user */
+.about-user {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    gap: 20px;
+    justify-content: space-between;
+}
+.about-user .card {
+    height: 250px;
+    width: 100%;
+}
+@media only screen and (max-width: 990px) {
+    .cng-profile-image {
+        left: 53%;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .about-user {
+        flex-direction: column;
+    }
+    .cng-profile-image {
+        left: 54%;
+    }
+}

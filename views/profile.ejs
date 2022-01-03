@@ -1,4 +1,6 @@
 <%- include("./template/profileHeader.ejs") %> 
+    <link rel="stylesheet" href="../css/profile.css">
+</head>
 <body>
     <nav class="bg-info">
         <a href="/">
@@ -9,20 +11,20 @@
         </a>
         <div class="auth-section">
             <% try { %> 
-            <% if (role.length == undefined) { %> 
-                <span>Guest</span>
-            <% } else { %>
-                <span><%= role %></span>
-            <% } %> 
+                <% if (typeof data == 'undefined') { %> 
+                    <span>Guest</span>
+                <% } else { %>
+                    <span><%= data.role %></span>
+                <% } %>  
             <div class="dropdown">
                 <button class="btn btn-info dropdown-toggle" data-placement="left" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="../upload/<%= imageName %>" height="40px" width="40px" class="rounded-circle">
+                    <img src="../upload/<%= data.imageName %>" height="40px" width="40px" class="rounded-circle" alt="Profile_image">
                     <% } catch(e) { %> 
-                    <div class="err-floating">Error: <%= e %></div>
+                        <div class="err-floating">⚠ Error occurred.</div>
                     <% } %>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <% if(role.length < 0) { %> 
+                    <% if(typeof data == "undefined") { %> 
                         <li><a class="dropdown-item" href="/signup"><i class="fas fa-user-plus"></i> Sign Up</a></li>
                         <li><a class="dropdown-item" href="/login"><i class="fas fa-sign-in-alt"></i> Log In</a></li>
                     <% } else { %> 
@@ -33,19 +35,52 @@
         </div>
     </nav>
     <main class="container mt-5 d-flex justify-content-center">
-        <div class="card" style="width: 18rem;">
-            <% try { %> 
-            <div class="profile-div">
-                <img src="../upload/<%= imageName %>" class="card-img-top profile-img rounded-circle" alt="profile-image">
+        <div class="container">
+            <div class="card">
+                <% try { %> 
+                    <div class="profile-div" style="background-image: url('../image/no_cover.png');">
+                        <a href="#"><span class="cng-image cng-cover-image" title="Change cover photo"><i class="fas fa-camera"></i></span></a>
+                        <img src="../upload/<%= data.imageName %>" class="card-img-top profile-img rounded-circle" alt="profile-image">
+                        <a href="#"><span class="cng-image cng-profile-image" title="Change profile picture"><i class="fas fa-camera"></i></span></a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-center"><%= data.username %></h5>
+                        <p class="card-text text-center"><%= data.email %></p>
+                    </div>
+                <% } catch(e) { %> 
+                    <p>necessary information not found: <%= e %> </p>
+                <% } %> 
             </div>
-            <% } catch(e) { %> 
-            <p>Profile picture not found: <%= e %> </p>
-            <% } %> 
-            <div class="card-body">
-                <h5 class="card-title">Profile Information</h5>
-                <p class="card-text">Username: <%= username %> </p>
-                <p class="card-text">Email: <%= email %> </p>
-                <a href="/" class="btn btn-secondary">Return Home</a>
+            <!-- About section -->
+            <div class="about-user">
+                <!-- profile information -->
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <span>User Information</span>
+                        <a href="/"><span title="Edit"><i class="fas fa-pencil-alt"></i></span></a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Basic Information</h5>
+                        <% if (typeof data != "undefined") { %> 
+                            <p class="card-text">Username: <%= data.username %> </p>
+                            <p class="card-text">Email: <%= data.email %> </p>
+                            <p class="card-text">Role: <%= data.role %> </p>
+                        <% } %> 
+                    </div>
+                </div>
+                <!-- user bio -->
+                <% if(typeof data != "undefined") { %>
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between">
+                            <span>Bio</span>
+                            <a href="/"><span title="Edit"><i class="fas fa-pencil-alt"></i></span></a>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">About Me</h5>
+                            <p class="card-text"><%= data.bio %> </p>
+                        </div>
+                    </div> 
+                <% } %> 
             </div>
         </div>
     </main>

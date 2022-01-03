@@ -1,21 +1,33 @@
 <%- include("./template/profileHeader.ejs") %> 
+</head>
 <body>
     <nav class="bg-info">
         <div class="fs-4 fw-bold">
-            <img width="40px" class="rounded" src="../image/logo.jpg" alt="logo">
+            <img width="40px" class="rounded" src="../image/favicon.png" alt="logo">
             <span>Demographics</span>
         </div>
         <div class="auth-section">
-            <span>Guest</span>
+            <% if(typeof loggedIn =="undefined") { %>
+                <span>Guest</span>
+            <% } else { %> 
+                <span><% loggedIn.role %> </span> 
+            <% } %> 
             <div class="dropdown">
                 <button class="btn btn-info dropdown-toggle" data-placement="left" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="../image/empty-profile.png" height="40px" width="40px" class="rounded-circle">
+                    <% if(typeof loggedIn == "undefined") { %>
+                        <img src="../image/empty-profile.png" height="40px" width="40px" class="rounded-circle">                     
+                    <% } else { %> 
+                        <img src="../upload/<%= loggedIn.imageName %> " height="40px" width="40px" class="rounded-circle">
+                    <% } %> 
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="/signup"><i class="fas fa-user-plus"></i> Sign Up</a></li>
-                    <li><a class="dropdown-item" href="/login"><i class="fas fa-sign-in-alt"></i> Log In</a></li>
-                    <!-- <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li> -->
+                    <% if(typeof loggedIn == "undefined") { %>
+                        <li><a class="dropdown-item" href="/signup"><i class="fas fa-user-plus"></i> Sign Up</a></li>
+                        <li><a class="dropdown-item" href="/login"><i class="fas fa-sign-in-alt"></i> Log In</a></li> 
+                    <% } else { %> 
+                        <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                        <li><a class="dropdown-item" href="/">Sign out</a></li>
+                    <% } %> 
                 </ul>
             </div>
         </div>
@@ -25,9 +37,11 @@
             <div class="card-header d-flex justify-content-between align-item-center">
                 <span>Quote</span>
                 <div>
-                    <a class="text-decoration-none" href="#">
-                        <span class="fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"> 🖍 </span>
-                    </a>
+                    <% if (typeof loggedIn != "undefined" && loggedIn.role == "admin") { %> 
+                        <a class="text-decoration-none" href="#">
+                            <span class="fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"> 🖍 </span>
+                        </a>
+                    <% } %> 
                     <a class="text-decoration-none" href="#">
                         <span class="fs-4 ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Settings"> ⚙ </span>
                     </a>

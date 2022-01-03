@@ -61,7 +61,7 @@ exports.signupData = async (req, res) => {
 	const role = "User";
 	const saltRounds = 5;
 	let hashedPassword;
-	const { username, email, password, confirmPassword } = req.body;
+	const { username, email, password, confirmPassword, bio } = req.body;
 	check(username)
 		.isAlpha("en-US", { ignore: " -" })
 		.withMessage("Name must not contain anything than characters")
@@ -78,8 +78,9 @@ exports.signupData = async (req, res) => {
 			password: hashedPassword,
 			imageName,
 			role,
+			bio,
 		});
-		formSaveData.save((err) => {
+		formSaveData.save((err, result) => {
 			if (err) {
 				res.status(500).send("Internal server error: " + err);
 				// deleting unused file
@@ -92,10 +93,7 @@ exports.signupData = async (req, res) => {
 			} else {
 				res.render("profile", {
 					title: "Profile",
-					username,
-					email,
-					imageName,
-					role,
+					data: result,
 				});
 			}
 		});

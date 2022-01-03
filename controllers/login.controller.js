@@ -14,24 +14,21 @@ exports.loginData = async (req, res) => {
 	// return true or false for the find result
 	const identify = /@/.test(usernameOrEmail);
 	if (identify) {
-		email =  usernameOrEmail;
-		data = await userModel.find({ email: email});
+		email = usernameOrEmail;
+		data = await userModel.find({ email: email });
 	} else {
-		username =  usernameOrEmail;
+		username = usernameOrEmail;
 		data = await userModel.find({ username: username });
 	}
 	if (data[0]) {
 		const match = await bcrypt.compare(password, data[0].password);
 		if (!match) {
-			res.render("login",{ title: "Log in", msg: "Invalid password or Username" });
-		} else {
-			res.render("Profile", {
-				title: "Profile",
-				email: data[0].email,
-				imageName: data[0].imageName,
-				username: data[0].username,
-				role: data[0].role,
+			res.render("login", {
+				title: "Log in",
+				msg: "Invalid password or Username",
 			});
+		} else {
+			res.render("Profile", { title: "Profile", data: data[0] });
 		}
 	} else {
 		res.send(`Login failed! Invalid password or email.`);
