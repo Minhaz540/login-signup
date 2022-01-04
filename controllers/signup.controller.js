@@ -1,5 +1,3 @@
-const express = require("express");
-const { check } = require("express-validator");
 require("dotenv").config();
 const bcrypt = require("bcrypt");
 const multer = require("multer");
@@ -8,7 +6,7 @@ const { unlink } = require("fs");
 const userModel = require("../models/user.model");
 
 const { UPLOAD_FOLDER } = process.env;
-let imageName;
+let imageName, dataPass;
 
 exports.signup = (req, res) => {
 	res.render("signup", { title: "Signup" });
@@ -62,10 +60,6 @@ exports.signupData = async (req, res) => {
 	const saltRounds = 5;
 	let hashedPassword;
 	const { username, email, password, confirmPassword, bio } = req.body;
-	check(username)
-		.isAlpha("en-US", { ignore: " -" })
-		.withMessage("Name must not contain anything than characters")
-		.trim();
 	hashedPassword = await bcrypt.hash(password, saltRounds);
 	const checkData = await userModel.find({
 		username: username,
@@ -91,6 +85,7 @@ exports.signupData = async (req, res) => {
 					}
 				);
 			} else {
+				passData = result;
 				res.render("profile", {
 					title: "Profile",
 					data: result,
@@ -105,3 +100,7 @@ exports.signupData = async (req, res) => {
 		});
 	}
 };
+
+exports.passSignupData = () => {
+	return dataPass;
+}

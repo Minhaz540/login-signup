@@ -6,6 +6,7 @@ const homeRoute = require("./routes/home.route");
 const profileRoute = require("./routes/profile.route");
 const signupRoute = require("./routes/signup.route");
 const loginRoute = require("./routes/login.route");
+const editProfile = require("./routes/editProfile.route");
 require("dotenv").config();
 
 app.use(express.json());
@@ -30,6 +31,7 @@ app.use(homeRoute);
 app.use(signupRoute);
 app.use(loginRoute);
 app.use(profileRoute);
+app.use(editProfile);
 
 app.use((req, res, next) => {
 	res.render("404_page", { title: "404 not found" });
